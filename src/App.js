@@ -1,32 +1,29 @@
-import logo from './logo.svg';
 import './App.scss';
 import React from 'react';
 import Counter from "./components/Counter/Counter";
+import SearchForm from "./components/SearchForm/SearchForm";
 
 class App extends React.Component {
 
-  state = { initialValue: 0 };
+  state = { initialValue: 0, query: 'asdf' };
 
-  handleValueChange = (value) => {
+  handleCounterChange = (value) => {
     this.setState({ initialValue: value });
+  }
+
+  handleQueryChange = (value) => {
+    this.setState({ query: value });
+  }
+
+  onSearch = () => {
+    return true;
   }
   render() {
     return (
         <div className="App">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-              <Counter initialValue={this.state.initialValue} onValueChange={this.handleValueChange}/>
+              <Counter initialValue={this.state.initialValue} onValueChange={this.handleCounterChange}/>
+              <SearchForm query={this.state.query} onQueryChange={this.handleQueryChange} onSearch={this.onSearch}/>
           </header>
         </div>
     );

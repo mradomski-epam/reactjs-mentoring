@@ -18,11 +18,12 @@ class Counter extends React.Component {
 }
 
 Counter.propTypes = {
-    initialValue: PropTypes.number
+    initialValue: PropTypes.number,
+    onValueChange: PropTypes.func
 };
 
 Counter.defaultProps = {
-    initialValue: 0
+    initialValue: 0,
 };
 
 export default Counter;
