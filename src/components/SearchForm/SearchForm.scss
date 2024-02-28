@@ -1,5 +1,8 @@
 .SearchForm {
   display: flex;
+  justify-content: center;
+  align-items: center;
+
   &__input {
     width: 700px;
     height: 60px;
@@ -16,6 +19,7 @@
   &__button {
     width: 230px;
     height: 60px;
+    margin-left: 16px;
     color: white;
     font-size: 20px;
     text-transform: uppercase;

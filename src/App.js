@@ -2,17 +2,23 @@ import './App.scss';
 import React from 'react';
 import Counter from "./components/Counter/Counter";
 import SearchForm from "./components/SearchForm/SearchForm";
+import GenreList from "./components/GenreSelect/GenreList";
 
 class App extends React.Component {
 
-  state = { initialValue: 0, query: 'asdf' };
+  state = {
+      initialSearchQuery: 'asdf',
+      currentGenre: 'All',
+      genreList: ['All', 'Documentary', 'Comedy', 'Horror', 'Crime']
+  };
 
-  handleCounterChange = (value) => {
-    this.setState({ initialValue: value });
-  }
 
   handleQueryChange = (value) => {
-    this.setState({ query: value });
+    this.setState({ initialSearchQuery: value });
+  }
+
+  handleGenreSelect = (genre) => {
+      this.setState({ currentGenre: genre })
   }
 
   onSearch = () => {
@@ -22,8 +28,16 @@ class App extends React.Component {
     return (
         <div className="App">
           <header className="App-header">
-              <Counter initialValue={this.state.initialValue} onValueChange={this.handleCounterChange}/>
-              <SearchForm query={this.state.query} onQueryChange={this.handleQueryChange} onSearch={this.onSearch}/>
+              <Counter/>
+              <SearchForm
+                  initialSearchQuery={this.state.initialSearchQuery}
+                  onSearch={this.onSearch}
+              />
+              <GenreList
+                  genreList={this.state.genreList}
+                  currentGenre={this.state.currentGenre}
+                  onSelect={this.handleGenreSelect}
+              />
           </header>
         </div>
     );
