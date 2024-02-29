@@ -9,13 +9,13 @@ class GenreList extends React.Component {
     render() {
         return (
             <ul className="GenreSelect__list">
-                {this.props.genreList.map((item, index) => {
+                {this.props.genreList.map((item) => {
                     return <li
-                        key={index}
-                        className={'GenreSelect__list__item ' + (this.props.currentGenre === item ? 'GenreSelect__list__item--selected' : '')}
-                        onClick={() => this.handleSelect(item)}
+                        key={item.id}
+                        className={'GenreSelect__list__item ' + (this.props.currentGenre === item.name ? 'GenreSelect__list__item--selected' : '')}
+                        onClick={() => this.handleSelect(item.name)}
                     >
-                        {item}
+                        {item.name}
                     </li>
                 })
                 }

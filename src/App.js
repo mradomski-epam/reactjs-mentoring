@@ -9,7 +9,26 @@ class App extends React.Component {
   state = {
       initialSearchQuery: 'asdf',
       currentGenre: 'All',
-      genreList: ['All', 'Documentary', 'Comedy', 'Horror', 'Crime']
+      genreList: [
+          {   id: 1,
+              name: 'All',
+          },
+          {
+            id: 2,
+            name: 'Documentary'
+          },
+          {
+            id: 3,
+            name: 'Comedy'
+          },
+          {
+            id: 4,
+            name: 'Horror'
+          },
+          {
+            id: 5,
+            name: 'Crime',
+          }]
   };
 
 
@@ -28,7 +47,7 @@ class App extends React.Component {
     return (
         <div className="App">
           <header className="App-header">
-              <Counter/>
+              <Counter initialValue={0}/>
               <SearchForm
                   initialSearchQuery={this.state.initialSearchQuery}
                   onSearch={this.onSearch}

@@ -7,7 +7,8 @@ class SearchForm extends React.Component {
         this.setState({ query: e.target.value });
     }
     handleSearch = (e) => {
-        this.props.onSearch(e);
+        e.preventDefault();
+        this.props.onSearch(this.state.query);
     }
 
     state = {

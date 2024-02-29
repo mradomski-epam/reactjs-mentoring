@@ -3,23 +3,23 @@ import PropTypes from 'prop-types';
 import './Counter.scss';
 
 class Counter extends React.Component {
-    state = { initialValue: 0 };
+    state = { value: this.props.initialValue };
     handleChange = (value) => {
-        this.setState({ initialValue: value })
+        this.setState({ value })
     }
     render() {
         return (
             <div>
-                {React.createElement("div", null, this.state.initialValue)}
+                {React.createElement("div", null, this.state.value)}
                 {
                     React.createElement('button', {
-                        onClick: () => this.handleChange(this.state.initialValue - 1)
+                        onClick: () => this.handleChange(this.state.value - 1)
                     },
                     ['decrement'])
                 }
                 {
                     React.createElement('button', {
-                            onClick: () => this.handleChange(this.state.initialValue + 1)
+                            onClick: () => this.handleChange(this.state.value + 1)
                         },
                         ['increment'])
                 }
