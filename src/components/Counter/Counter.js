@@ -9,19 +9,24 @@ class Counter extends React.Component {
     }
     render() {
         return (
-            <div>
-                {React.createElement("div", null, this.state.value)}
+            <div data-testid="counter">
+                {
+                    React.createElement('div', {
+                    'data-testid': 'counter-value'
+                    }, this.state.value)}
                 {
                     React.createElement('button', {
+                        'data-testid': 'counter-decrement',
                         onClick: () => this.handleChange(this.state.value - 1)
                     },
                     ['decrement'])
                 }
                 {
                     React.createElement('button', {
-                            onClick: () => this.handleChange(this.state.value + 1)
-                        },
-                        ['increment'])
+                        'data-testid': 'counter-increment',
+                        onClick: () => this.handleChange(this.state.value + 1)
+                    },
+                    ['increment'])
                 }
             </div>
         )

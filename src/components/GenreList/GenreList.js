@@ -8,9 +8,10 @@ class GenreList extends React.Component {
     }
     render() {
         return (
-            <ul className="GenreSelect__list">
+            <ul className="GenreSelect__list" data-testid="genre-list">
                 {this.props.genreList.map((item) => {
                     return <li
+                        data-testid={`genre-list-${item.id}`}
                         key={item.id}
                         className={'GenreSelect__list__item ' + (this.props.currentGenre === item.name ? 'GenreSelect__list__item--selected' : '')}
                         onClick={() => this.handleSelect(item.name)}
