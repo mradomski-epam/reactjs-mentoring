@@ -3,6 +3,7 @@ import React from 'react';
 import Counter from "./components/Counter/Counter";
 import SearchForm from "./components/SearchForm/SearchForm";
 import GenreList from "./components/GenreList/GenreList";
+import MovieTile from "./components/MovieTile/MovieTile";
 
 class App extends React.Component {
 
@@ -28,7 +29,27 @@ class App extends React.Component {
           {
             id: 5,
             name: 'Crime',
-          }]
+          }],
+      movies: [
+          {
+              imageUrl: 'https://www.movieposters.com/cdn/shop/products/b892c2f862023362da3e66ec2b92a699_90de31ac-e4ca-476e-8cc0-f634509f364b_480x.progressive.jpg?v=1573585334',
+              name: 'Scarface',
+              releaseYear: 1983,
+              relevantGenres: [
+                  'Action',
+                  'Drama',
+              ]
+          },
+          {
+              imageUrl: 'https://www.movieposters.com/cdn/shop/files/Casino.mpw.102809_480x.progressive.jpg?v=1707421876',
+              name: 'Casino',
+              releaseYear: 1995,
+              relevantGenres: [
+                  'Crime',
+                  'Thriller',
+              ]
+          }
+      ]
   };
 
 
@@ -57,6 +78,11 @@ class App extends React.Component {
                   currentGenre={this.state.currentGenre}
                   onSelect={this.handleGenreSelect}
               />
+              {
+                  this.state.movies.map((movie) => {
+                      return <MovieTile {...movie}/>
+                  })
+              }
           </header>
         </div>
     );

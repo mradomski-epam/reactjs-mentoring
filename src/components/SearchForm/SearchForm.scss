@@ -11,9 +11,7 @@
     color: gray;
     border-radius: 6px;
     font-size: 20px;
-    ::placeholder {
-      color: gray;
-    }
+    padding-left: 8px;
   }
 
   &__button {
