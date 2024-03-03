@@ -16,7 +16,7 @@ test('should render Counter element with proper initial value', () => {
 test('incrementing Counter increases value in it', () => {
     render(<Counter initialValue={initialValue}/>);
     const valueElement = screen.getByTestId('counter-value');
-    const incrementElement = screen.getByTestId('counter-increment');
+    const incrementElement = screen.getByText('increment');
     fireEvent.click(incrementElement);
     expect(valueElement).toHaveTextContent((initialValue + 1).toString());
 });
@@ -24,7 +24,7 @@ test('incrementing Counter increases value in it', () => {
 test('decrementing Counter decrements value in it', () => {
     render(<Counter initialValue={initialValue}/>);
     const valueElement = screen.getByTestId('counter-value');
-    const incrementElement = screen.getByTestId('counter-decrement');
+    const incrementElement = screen.getByText('decrement');
     fireEvent.click(incrementElement);
     expect(valueElement).toHaveTextContent((initialValue - 1).toString());
 });
