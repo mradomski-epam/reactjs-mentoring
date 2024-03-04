@@ -4,6 +4,8 @@ import Counter from "./components/Counter/Counter";
 import SearchForm from "./components/SearchForm/SearchForm";
 import GenreList from "./components/GenreList/GenreList";
 import MovieTile from "./components/MovieTile/MovieTile";
+import MovieDetails from "./components/MovieDetails/MovieDetails";
+import SortControl from "./components/SortControl/SortControl";
 
 class App extends React.Component {
 
@@ -38,7 +40,10 @@ class App extends React.Component {
               relevantGenres: [
                   'Action',
                   'Drama',
-              ]
+              ],
+              rating: 8.3,
+              duration: 170,
+              description: 'In 1980 Miami, a determined Cuban immigrant takes over a drug cartel and succumbs to greed.',
           },
           {
               imageUrl: 'https://www.movieposters.com/cdn/shop/files/Casino.mpw.102809_480x.progressive.jpg?v=1707421876',
@@ -47,18 +52,34 @@ class App extends React.Component {
               relevantGenres: [
                   'Crime',
                   'Thriller',
-              ]
+              ],
+              rating: 8.2,
+              duration: 178,
+              description: 'In Las Vegas, two best friends - a casino executive and a mafia enforcer - compete for a gambling empire and a fast-living, fast-loving socialite.',
+          }
+      ],
+      selectedMovie: null,
+      sortBy: '',
+      sortByOptions: [
+          {
+           label: 'Release Date', value: 'releaseDate',
+          },
+          {
+              label: 'Title', value: 'title',
           }
       ]
   };
 
-
-  handleQueryChange = (value) => {
-    this.setState({ initialSearchQuery: value });
-  }
-
   handleGenreSelect = (genre) => {
       this.setState({ currentGenre: genre })
+  }
+
+  handleSelectMovie = (movie) => {
+    this.setState({ selectedMovie: this.state.movies.find((item) => item.name === movie) });
+  }
+
+  handleChangeSortBy = (sortBy) => {
+      this.setState({ sortBy });
   }
 
   onSearch = () => {
@@ -68,22 +89,45 @@ class App extends React.Component {
     return (
         <div className="App">
           <header className="App-header">
-              <Counter initialValue={0}/>
-              <SearchForm
-                  initialSearchQuery={this.state.initialSearchQuery}
-                  onSearch={this.onSearch}
-              />
-              <GenreList
-                  genreList={this.state.genreList}
-                  currentGenre={this.state.currentGenre}
-                  onSelect={this.handleGenreSelect}
-              />
-              {
-                  this.state.movies.map((movie) => {
-                      return <MovieTile {...movie}/>
-                  })
-              }
           </header>
+            <section className="App-search">
+                {
+                    this.state.selectedMovie ?
+                        <MovieDetails {...this.state.selectedMovie} /> :
+                        <div>
+                            <SearchForm
+                                initialSearchQuery={this.state.initialSearchQuery}
+                                onSearch={this.onSearch}
+                            />
+                        </div>
+                }
+            </section>
+            {/*<div className="App-search">*/}
+            {/*    */}
+            {/*</div>*/}
+            <section className="App-sort-bar">
+                <GenreList
+                    genreList={this.state.genreList}
+                    currentGenre={this.state.currentGenre}
+                    onSelect={this.handleGenreSelect}
+                />
+                <SortControl
+                    options={this.state.sortByOptions}
+                    currentSort={this.state.sortByOptions[0]}
+                    setCurrentSort={this.handleChangeSortBy}
+                ></SortControl>
+            </section>
+            {/*<div className="App-sort-bar">*/}
+            {/*    */}
+            {/*</div>*/}
+
+            <section className="App-movie-list">
+                {
+                    this.state.movies.map((movie) => {
+                        return <MovieTile {...movie} onSelectMovie={this.handleSelectMovie} key={movie.name}/>
+                    })
+                }
+            </section>
         </div>
     );
   }

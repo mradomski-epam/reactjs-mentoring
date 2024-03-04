@@ -1,0 +1,47 @@
+.SortControl {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  &__text {
+    font-weight: 400;
+    color: #ffffff;
+    opacity: .6;
+  }
+  &__select {
+    color: #ffffff;
+    background-color: transparent;
+    border: 0 !important;
+    font-weight: 500;
+    margin-left: 32px;
+    &:focus-within {
+      box-shadow: none !important;
+    }
+    .react-dropdown-select {
+      &-dropdown {
+        background-color: transparent;
+        box-shadow: none;
+        border: 0;
+      }
+      &-item {
+        border-bottom: 0;
+        &:hover {
+          background: transparent;
+        }
+        &-selected {
+          // important is there strictly to override default custom component styles
+          background: transparent !important;
+          color: #f65261 !important;
+          border-bottom: 0 !important;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  &__option {
+    background-color: transparent;
+  }
+}

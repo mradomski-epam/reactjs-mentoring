@@ -1,1 +1,44 @@
-.MovieTile {}
+.MovieTile {
+  width: 320px;
+  margin: 8px 16px;
+  cursor: pointer;
+
+  &__image {
+    width: 100%;
+    object-fit: contain;
+    &__wrapper {
+      max-height: 500px;
+    }
+  }
+  &__description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 16px;
+  }
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: #ffffff;
+    font-weight: 500;
+  }
+  &__name {
+    font-size: 18px;
+    opacity: .7;
+    margin: 0;
+  }
+  &__genres {
+    font-size: 14px;
+    opacity: 0.5;
+  }
+  &__releaseYear {
+    font-size: 14px;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid #979797;
+  }
+}
