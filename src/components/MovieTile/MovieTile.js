@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import './MovieTile.scss';
 
 class MovieTile extends React.Component {
+
+    handleSelectMovie = (name) => {
+        this.props.onSelectMovie(name);
+    }
     render() {
         return (
             <div
                 className="MovieTile"
-                data-testid="MovieTile"
+                data-testid={`MovieTile-${this.props.name}`}
+                onClick={() => this.handleSelectMovie(this.props.name) }
             >
                 <div className="MovieTile__image__wrapper">
                     {
-                        this.props.imageUrl ? <img src={this.props.imageUrl} alt="movie image" className="MovieTile__image"/> : ''
+                        this.props.imageUrl ? <img src={this.props.imageUrl} alt={`${this.props.name} poster`} className="MovieTile__image"/> : ''
                     }
                 </div>
                 <div className="MovieTile__description">
