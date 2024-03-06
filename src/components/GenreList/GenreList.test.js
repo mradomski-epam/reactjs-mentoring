@@ -38,6 +38,7 @@ test('component highlight selected genre passed in props', () => {
     const selectedIndex = 1;
     render(<GenreList genreList={genreList} currentGenre={genreList[selectedIndex].name}/>);
     expect(screen.getByRole('tab', { selected: true })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { selected: true })).toHaveTextContent(genreList[selectedIndex].name);
 });
 
 test('component calls onChange callback and passes correct genre in arguments', () => {
