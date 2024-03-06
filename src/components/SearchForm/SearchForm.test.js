@@ -1,10 +1,6 @@
-import {render, screen, cleanup, fireEvent} from "@testing-library/react";
+import {render, screen, fireEvent} from "@testing-library/react";
 
 import SearchForm from "./SearchForm";
-
-afterEach(() => {
-    cleanup();
-});
 
 const initialSearchQuery = 'search something!';
 test('render SearchForm with value equal to initial value passed in props', () => {
