@@ -59,6 +59,14 @@ class App extends React.Component {
       ],
       selectedMovie: null,
       sortBy: '',
+      sortByOptions: [
+          {
+              label: 'Release Date', value: 'releaseDate',
+          },
+          {
+              label: 'Title', value: 'title',
+          }
+      ]
   };
 
   handleGenreSelect = (genre) => {
