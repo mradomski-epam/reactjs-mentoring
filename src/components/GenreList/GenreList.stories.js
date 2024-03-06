@@ -1,3 +1,4 @@
+import { useArgs } from '@storybook/preview-api';
 import GenreList from './GenreList';
 import './GenreList.scss';
 
@@ -43,17 +44,50 @@ export default {
         }
     }
 };
+export const noCurrentGenre = {
+    args: {
+        genreList,
+        currentGenre: '',
+    },
+    render: function Render() {
+        const [{ genreList, currentGenre }, updateArgs] = useArgs();
 
-export const NoCurrentGenre = (args) => {
-    return <GenreList {...args} />;
-}
-NoCurrentGenre.args = {
-    genreList,
-}
-export const CurrentGenreSelected = (args) => {
-    return <GenreList {...args} />;
+        const onSelected = (name) => {
+            console.log(name);
+            updateArgs({ currentGenre: name });
+        }
+
+        return <GenreList genreList={genreList} onSelect={onSelected} currentGenre={currentGenre}/>
+    },
 };
-CurrentGenreSelected.args = {
-    genreList,
-    currentGenre: genreList[0].name,
-}
+
+export const withCurrentGenre = {
+    args: {
+        genreList,
+        currentGenre: 'All',
+    },
+    render: function Render() {
+        const [{ genreList, currentGenre }, updateArgs] = useArgs();
+
+        const onSelected = (name) => {
+            console.log(name);
+            updateArgs({ currentGenre: name });
+        }
+
+        return <GenreList genreList={genreList} onSelect={onSelected} currentGenre={currentGenre}/>
+    },
+};
+
+// export const NoCurrentGenre = (args) => {
+//     return <GenreList {...args} />;
+// }
+// NoCurrentGenre.args = {
+//     genreList,
+// }
+// export const CurrentGenreSelected = (args) => {
+//     return <GenreList {...args} />;
+// };
+// CurrentGenreSelected.args = {
+//     genreList,
+//     currentGenre: genreList[0].name,
+// }

@@ -1,5 +1,6 @@
 import SearchForm from "./SearchForm";
 import './SearchForm.scss';
+import {useArgs} from "@storybook/preview-api";
 
 export default {
     title: 'components/SearchForm',
@@ -10,13 +11,26 @@ export default {
     },
 }
 
-export const NoInitialQuery = () => {
-    return <SearchForm/>
+export const NoInitialQuery = {
+    args: {
+        initialSearchQuery: '',
+    },
+    render: function Render() {
+        const [{ initialSearchQuery }] = useArgs();
+        const onSearch = () => {}
+
+        return <SearchForm initialSearchQuery={initialSearchQuery} onSearch={onSearch}/>
+    }
 }
 
-export const WithInitialQuery = (args) => {
-    return <SearchForm {...args}/>
-}
-WithInitialQuery.args = {
-    initialSearchQuery: 'search something!',
+export const WithInitialQuery = {
+    args: {
+        initialSearchQuery: 'search something!',
+    },
+    render: function Render() {
+        const [{ initialSearchQuery }] = useArgs();
+        const onSearch = () => {}
+
+        return <SearchForm initialSearchQuery={initialSearchQuery} onSearch={onSearch}/>
+    }
 }

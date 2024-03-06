@@ -32,7 +32,7 @@ test('renders component and have data visible', () => {
 test('component gets clicked and calls back movie name', () => {
     const onSelectMovie = jest.fn();
     render(<MovieTile {...movieTileTest} onSelectMovie={onSelectMovie}/>);
-    const movieElement = screen.getByTestId(`MovieTile-${movieTileTest.name}`);
-    fireEvent.click(movieElement);
+    const image = screen.getByAltText((movieTileTest.name + ' poster'));
+    fireEvent.click(image);
     expect(onSelectMovie).toHaveBeenCalledWith(movieTileTest.name);
 });

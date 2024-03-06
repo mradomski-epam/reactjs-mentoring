@@ -3,7 +3,7 @@ import './MovieDetails.scss';
 
 const testData = {
     imageUrl: 'https://www.movieposters.com/cdn/shop/files/Casino.mpw.102809_480x.progressive.jpg?v=1707421876',
-    name: 'Casino',
+    movieName: 'Casino',
     releaseYear: 1995,
     relevantGenres: [
         'Crime',

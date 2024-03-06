@@ -15,14 +15,14 @@ class MovieDetails extends React.Component {
             <div className="MovieDetails__wrapper" data-testid="movie-details-wrapper">
                 <img
                     src={this.props.imageUrl}
-                    alt={`${this.props.name} poster`}
+                    alt={`${this.props.movieName} poster`}
                     className="MovieDetails__image"
                     data-testId="movie-details-image"
                 />
                 <div className="MovieDetails__details">
                     <div className="MovieDetails__title__wrapper">
                         <h2 className="MovieDetails__title">
-                            {this.props.name}
+                            {this.props.movieName}
                         </h2>
                         <div className="MovieDetails__rating">
                             <span>{this.props.rating}</span>
@@ -42,7 +42,7 @@ class MovieDetails extends React.Component {
 
 MovieDetails.propTypes = {
     imageUrl:  PropTypes.string,
-    name: PropTypes.string,
+    movieName: PropTypes.string,
     releaseYear: PropTypes.number,
     relevantGenres: PropTypes.arrayOf(PropTypes.string),
     rating: PropTypes.number,

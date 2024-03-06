@@ -42,6 +42,7 @@ MovieTile.propTypes = {
     name: PropTypes.string,
     releaseYear: PropTypes.number,
     relevantGenres: PropTypes.arrayOf(PropTypes.string),
+    onSelectMovie: PropTypes.func,
 };
 
 MovieTile.defaultProps = {
