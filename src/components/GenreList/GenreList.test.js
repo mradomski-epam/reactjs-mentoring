@@ -29,22 +29,23 @@ const genreList = [
 
 test('component renders all genres passed in props', () => {
     render(<GenreList genreList={genreList}/>);
-    const genreListElements = screen.queryAllByTestId(/genre-list-[1-5]/);
-    expect(genreListElements.length).toBe(genreList.length);
+    genreList.forEach((genre) => {
+        expect(screen.getByText(genre.name)).toBeInTheDocument();
+    });
 });
 
 test('component highlight selected genre passed in props', () => {
     const selectedIndex = 1;
     render(<GenreList genreList={genreList} currentGenre={genreList[selectedIndex].name}/>);
-    const selectedGenreElement = screen.getByTestId('genre-list-' + genreList[selectedIndex].id);
-    expect(selectedGenreElement).toHaveClass('GenreSelect__list__item--selected');
+    expect(screen.getByRole('tab', { selected: true })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { selected: true })).toHaveTextContent(genreList[selectedIndex].name);
 });
 
 test('component calls onChange callback and passes correct genre in arguments', () => {
     const selectedIndex = 1;
     const onSelect = jest.fn();
     render(<GenreList genreList={genreList} currentGenre={genreList[0].name} onSelect={onSelect}/>);
-    const selectedGenreElement = screen.getByTestId('genre-list-'+ genreList[selectedIndex].id);
+    const selectedGenreElement = screen.getByRole('tab', { name: genreList[selectedIndex].name });
     fireEvent.click(selectedGenreElement);
     expect(onSelect).toHaveBeenCalledWith(genreList[selectedIndex].name);
 });

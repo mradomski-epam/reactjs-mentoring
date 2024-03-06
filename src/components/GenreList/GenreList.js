@@ -3,23 +3,36 @@ import PropTypes from 'prop-types';
 import './GenreList.scss';
 
 class GenreList extends React.Component {
-    handleSelect = (index) => {
-        this.props.onSelect(index);
+    handleSelect = (name) => {
+        this.props.onSelect(name);
     }
     render() {
         return (
-            <ul className="GenreSelect__list" data-testid="genre-list">
+            <ul role="genreList" className="GenreSelect__list" data-testid="genre-list">
                 {this.props.genreList.map((item) => {
-                    return <li
-                        data-testid={`genre-list-${item.id}`}
-                        key={item.id}
-                        className={'GenreSelect__list__item ' + (this.props.currentGenre === item.name ? 'GenreSelect__list__item--selected' : '')}
-                        onClick={() => this.handleSelect(item.name)}
-                    >
-                        {item.name}
-                    </li>
-                })
-                }
+                    const isSelected = this.props.currentGenre === item.name;
+                    return (
+                        <li
+                            role="presentation"
+                            data-testid={`genre-list-${item.id}`}
+                            key={item.id}
+                            className={
+                                "GenreSelect__list__item " +
+                                (isSelected ? "GenreSelect__list__item--selected" : "")
+                            }>
+                            <button
+                                role="tab"
+                                aria-label={item.name}
+                                aria-controls={`panel-id-${item.id}`}
+                                aria-selected={isSelected}
+                                id={`tab-id-${item.id}`}
+                                onClick={() => this.handleSelect(item.name)}
+                            >
+                                {item.name}
+                            </button>
+                        </li>
+                    );
+                })}
             </ul>
         )
     }
