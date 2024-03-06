@@ -16,14 +16,17 @@ class SearchForm extends React.Component {
     }
     render() {
         return (
-            <form className="SearchForm" onSubmit={this.handleSearch}>
+            <form data-testid="search-form" role="form" className="SearchForm" onSubmit={this.handleSearch}>
                 <input
+                    type="text"
+                    aria-label="search form input"
                     className="SearchForm__input"
                     placeholder="What do you want to search?"
                     onInput={ this.handleChangeQuery }
                     value={ this.state.query }
                 />
                 <button
+                    aria-label="search form submit"
                     type="submit"
                     className="SearchForm__button"
                     onClick={ this.handleSearch }

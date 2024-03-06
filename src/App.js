@@ -2,7 +2,7 @@ import './App.scss';
 import React from 'react';
 import Counter from "./components/Counter/Counter";
 import SearchForm from "./components/SearchForm/SearchForm";
-import GenreList from "./components/GenreSelect/GenreList";
+import GenreList from "./components/GenreList/GenreList";
 
 class App extends React.Component {
 
