@@ -11,17 +11,17 @@ class MovieTile extends React.Component {
         return (
             <div
                 className="MovieTile"
-                data-testid={`MovieTile-${this.props.name}`}
-                onClick={() => this.handleSelectMovie(this.props.name) }
+                data-testid={`MovieTile-${this.props.movieName}`}
+                onClick={() => this.handleSelectMovie(this.props.movieName) }
             >
                 <div className="MovieTile__image__wrapper">
                     {
-                        this.props.imageUrl ? <img src={this.props.imageUrl} alt={`${this.props.name} poster`} className="MovieTile__image"/> : ''
+                        this.props.imageUrl ? <img src={this.props.imageUrl} alt={`${this.props.movieName} poster`} className="MovieTile__image"/> : ''
                     }
                 </div>
                 <div className="MovieTile__description">
                     <div className="MovieTile__details">
-                        <h3 className="MovieTile__name">{ this.props.name }</h3>
+                        <h3 className="MovieTile__name">{ this.props.movieName }</h3>
                         <span className="MovieTile__genres">
                             {
                                 this.props.relevantGenres.join(', ')

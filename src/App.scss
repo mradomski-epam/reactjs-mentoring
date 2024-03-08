@@ -33,6 +33,23 @@
     justify-content: space-between;
     align-items: center;
   }
+  &-button {
+    width: 230px;
+    height: 60px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    &--primary {
+      color: white;
+      background-color: #f65261;
+    }
+    &--secondary {
+      color: #f65261;
+      background-color: transparent;
+      border: 1px solid #f65261;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -5,35 +5,48 @@ import GenreList from "./components/GenreList/GenreList";
 import MovieTile from "./components/MovieTile/MovieTile";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
 import SortControl from "./components/SortControl/SortControl";
+import Modal from "./components/Modal/Modal";
+import MovieForm from "./components/MovieForm/MovieForm";
+
+export const GENRE_LIST = [
+    {   value: 1,
+        name: 'All',
+    },
+    {
+        id: 2,
+        name: 'Documentary'
+    },
+    {
+        id: 3,
+        name: 'Comedy'
+    },
+    {
+        id: 4,
+        name: 'Thriller'
+    },
+    {
+        id: 5,
+        name: 'Crime',
+    },
+    {
+        id: 6,
+        name: 'Action',
+    },
+    {
+        id: 7,
+        name: 'Drama',
+    }
+]
 
 class App extends React.Component {
 
   state = {
       initialSearchQuery: 'asdf',
       currentGenre: 'All',
-      genreList: [
-          {   id: 1,
-              name: 'All',
-          },
-          {
-            id: 2,
-            name: 'Documentary'
-          },
-          {
-            id: 3,
-            name: 'Comedy'
-          },
-          {
-            id: 4,
-            name: 'Horror'
-          },
-          {
-            id: 5,
-            name: 'Crime',
-          }],
+      genreList: GENRE_LIST,
       movies: [
           {
-              imageUrl: 'https://www.movieposters.com/cdn/shop/products/b892c2f862023362da3e66ec2b92a699_90de31ac-e4ca-476e-8cc0-f634509f364b_480x.progressive.jpg?v=1573585334',
+              imageUrl: 'https://www.movieposters.com/cdn/shop/products/d3b27b0547871234b683c5e7b9549677_25c5cfd2-9653-4e3b-b8bc-fc2b9b7ed414_480x.progressive.jpg?v=1573585337',
               movieName: 'Scarface',
               releaseYear: 1983,
               relevantGenres: [
@@ -66,15 +79,20 @@ class App extends React.Component {
           {
               label: 'Title', value: 'title',
           }
-      ]
+      ],
+      modalOpen: false,
+      modalTitle: '',
   };
+  toggleModalOpen = () => {
+      this.setState({ modalOpen: !this.state.modalOpen });
+  }
 
   handleGenreSelect = (genre) => {
       this.setState({ currentGenre: genre })
   }
 
   handleSelectMovie = (movie) => {
-    this.setState({ selectedMovie: this.state.movies.find((item) => item.name === movie) });
+    this.setState({ selectedMovie: this.state.movies.find((item) => item.movieName === movie) });
   }
 
   handleChangeSortBy = (sortBy) => {
@@ -87,6 +105,17 @@ class App extends React.Component {
   render() {
     return (
         <div className="App">
+          <div id="App-portal"></div>
+            <Modal
+                onClose={this.toggleModalOpen}
+                open={this.state.modalOpen}
+                title={this.state.modalTitle}
+            >
+                <MovieForm
+                    onSubmit={() => { console.log('submitted!') }}
+                    movieData={this.state.selectedMovie}
+                />
+            </Modal>
           <header className="App-header">
           </header>
             <section className="App-search">
