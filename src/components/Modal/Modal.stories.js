@@ -1,8 +1,9 @@
 import { useArgs } from '@storybook/preview-api';
 import Modal from './Modal';
-import './Modal.scss';
 import MovieForm from '../MovieForm/MovieForm';
+import './Modal.scss';
 import '../MovieForm/MovieForm.scss';
+import '../../App.scss';
 
 const GENRE_LIST = [
     {   value: 'All',
@@ -34,22 +35,12 @@ const GENRE_LIST = [
     }
 ]
 
-const EMPTY_FORM = {
-    movieTitle: '',
-    releaseDate: '',
-    movieUrl: '',
-    rating: 0,
-    relevantGenres: [],
-    duration: 0,
-    description: '',
-}
-
 const FILLED_FORM = {
     movieTitle: 'TEST',
     releaseDate: '2024-03-08',
     movieUrl: 'https://epam.com',
     rating: 0.1,
-    relevantGenres: [GENRE_LIST[0]],
+    relevantGenres: [GENRE_LIST[0], GENRE_LIST[1]],
     duration: 131,
     description: 'blablabla',
 }
@@ -93,20 +84,20 @@ export const EditMovie = {
     }
 }
 
-// export const DeleteMovie = {
-//     args: {
-//         open: true,
-//         title: 'delete movie',
-//     },
-//     render: function Render() {
-//         const [{ open, title, form }] = useArgs();
-//         return <Modal open={open} title={title}>
-//             <div style="display: flex; flex-direction: column;">
-//                 <p>Are you sure you want to delete this movie?</p>
-//                 <div style="display: flex; justify-content: flex-end;">
-//                     <button className="App-button--primary">confirm</button>
-//                 </div>
-//             </div>
-//         </Modal>
-//     }
-// }
+export const DeleteMovie = {
+    args: {
+        open: true,
+        title: 'delete movie',
+    },
+    render: function Render() {
+        const [{ open, title }] = useArgs();
+        return <Modal open={open} title={title}>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+                <p>Are you sure you want to delete this movie?</p>
+                <div className="MovieForm__row--buttons">
+                    <button className="MovieForm__row--button App-button App-button--primary">confirm</button>
+                </div>
+            </div>
+        </Modal>
+    }
+}

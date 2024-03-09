@@ -9,7 +9,8 @@ const MODAL_STYLES = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#232323',
-    padding: '36px 18px',
+    padding: '36px',
+    fontSize: '20px',
     zIndex: 1000,
 }
 const OVERLAY_STYLES = {

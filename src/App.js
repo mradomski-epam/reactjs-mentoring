@@ -105,6 +105,7 @@ class App extends React.Component {
   render() {
     return (
         <div className="App">
+            <button onClick={this.toggleModalOpen}></button>
           <div id="App-portal"></div>
             <Modal
                 onClose={this.toggleModalOpen}

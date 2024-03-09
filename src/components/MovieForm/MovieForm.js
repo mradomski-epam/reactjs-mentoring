@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GENRE_LIST from '../../App';
+// import GENRE_LIST from '../../App';
 import './MovieForm.scss';
 import Select from "react-dropdown-select";
 
@@ -14,6 +14,36 @@ const EMPTY_FORM = {
     description: '',
 }
 
+const GENRE_LIST = [
+    {   value: 1,
+        label: 'All',
+    },
+    {
+        id: 2,
+        label: 'Documentary'
+    },
+    {
+        id: 3,
+        label: 'Comedy'
+    },
+    {
+        id: 4,
+        label: 'Thriller'
+    },
+    {
+        id: 5,
+        label: 'Crime',
+    },
+    {
+        id: 6,
+        label: 'Action',
+    },
+    {
+        id: 7,
+        label: 'Drama',
+    }
+];
+
 class MovieForm extends React.Component {
     state = {
         form: this.props.movieData ? {
@@ -22,7 +52,7 @@ class MovieForm extends React.Component {
             movieUrl: this.props.movieData.movieUrl || '',
             rating: this.props.movieData.rating || 0,
             relevantGenres: this.props.movieData.relevantGenres.map((genre) => {
-                return GENRE_LIST.find((item) => item.name === genre);
+                return GENRE_LIST.find((item) => item.value === genre.value);
             }).filter(Boolean)|| [],
             duration: this.props.movieData.duration || 0,
             description: this.props.movieData.description || '',
@@ -141,6 +171,7 @@ class MovieForm extends React.Component {
                             name="movieTitle"
                             id="movieTitle"
                             type="text"
+                            placeholder="Movie title"
                             onInput={this.onTitleChange}
                             value={this.state.form.movieTitle}
                         />
@@ -157,6 +188,7 @@ class MovieForm extends React.Component {
                             name="releaseDate"
                             id="releaseDate"
                             type="date"
+                            placeholder="Select date"
                             onChange={this.onReleaseDateChange}
                             value={this.state.form.releaseDate}
                         />
@@ -175,6 +207,7 @@ class MovieForm extends React.Component {
                             name="movieUrl"
                             id="movieUrl"
                             type="text"
+                            placeholder="https://"
                             onInput={this.onMovieUrlChange}
                             value={this.state.form.movieUrl}
                         />
@@ -191,6 +224,7 @@ class MovieForm extends React.Component {
                             name="rating"
                             id="rating"
                             type="number"
+                            placeholder="7.8"
                             min={0}
                             max={10}
                             step={0.1}
@@ -210,6 +244,7 @@ class MovieForm extends React.Component {
                         <Select
                             searchable={false}
                             multi={true}
+                            placeholder={"Select genre"}
                             className="MovieForm__select"
                             values={this.state.form.relevantGenres}
                             options={this.state.genreList}
@@ -228,6 +263,7 @@ class MovieForm extends React.Component {
                             name="duration"
                             id="duration"
                             type="number"
+                            placeholder="minutes"
                             min={0}
                             step={1}
                             onChange={this.onDurationChange}
@@ -247,6 +283,7 @@ class MovieForm extends React.Component {
                             className="MovieForm__input MovieForm__input-textarea"
                             name="overview"
                             id="overview"
+                            placeholder="Movie description"
                             onInput={this.onDescriptionChange}
                             value={this.state.form.description}
                         />
