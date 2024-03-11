@@ -24,7 +24,7 @@ class MovieTile extends React.Component {
                         <h3 className="MovieTile__name">{ this.props.movieName }</h3>
                         <span className="MovieTile__genres">
                             {
-                                this.props.relevantGenres.join(', ')
+                                this.props.relevantGenres.map(genre => genre.name).join(', ')
                             }
                         </span>
                     </div>
@@ -41,7 +41,7 @@ MovieTile.propTypes = {
     imageUrl:  PropTypes.string,
     name: PropTypes.string,
     releaseYear: PropTypes.number,
-    relevantGenres: PropTypes.arrayOf(PropTypes.string),
+    relevantGenres: PropTypes.arrayOf(PropTypes.object),
     onSelectMovie: PropTypes.func,
 };
 

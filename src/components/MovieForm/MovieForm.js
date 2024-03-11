@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import GENRE_LIST from '../../App';
+import { GENRE_LIST } from '../../data/common';
 import './MovieForm.scss';
 import Select from "react-dropdown-select";
 
 const EMPTY_FORM = {
     movieTitle: '',
-    releaseDate: '2024-03-08',
+    releaseDate: '',
     movieUrl: '',
     rating: 0,
     relevantGenres: [],
@@ -14,117 +14,34 @@ const EMPTY_FORM = {
     description: '',
 }
 
-const GENRE_LIST = [
-    {   value: 1,
-        label: 'All',
-    },
-    {
-        id: 2,
-        label: 'Documentary'
-    },
-    {
-        id: 3,
-        label: 'Comedy'
-    },
-    {
-        id: 4,
-        label: 'Thriller'
-    },
-    {
-        id: 5,
-        label: 'Crime',
-    },
-    {
-        id: 6,
-        label: 'Action',
-    },
-    {
-        id: 7,
-        label: 'Drama',
-    }
-];
-
 class MovieForm extends React.Component {
     state = {
         form: this.props.movieData ? {
             movieTitle: this.props.movieData.movieTitle || '',
-            releaseDate: this.props.movieData.releaseDate || '2024-03-08',
+            releaseDate: this.props.movieData.releaseDate || '',
             movieUrl: this.props.movieData.movieUrl || '',
             rating: this.props.movieData.rating || 0,
-            relevantGenres: this.props.movieData.relevantGenres.map((genre) => {
-                return GENRE_LIST.find((item) => item.value === genre.value);
-            }).filter(Boolean)|| [],
+            relevantGenres: this.props.movieData.relevantGenres || [],
             duration: this.props.movieData.duration || 0,
             description: this.props.movieData.description || '',
         } : EMPTY_FORM,
-        genreList: [
-            {   value: 'All',
-                label: 'All',
-            },
-            {
-                value: 'Documentary',
-                label: 'Documentary'
-            },
-            {
-                value: 'Comedy',
-                label: 'Comedy'
-            },
-            {
-                value: 'Thriller',
-                label: 'Thriller'
-            },
-            {
-                value: 'Crime',
-                label: 'Crime',
-            },
-            {
-                value: 'Action',
-                label: 'Action',
-            },
-            {
-                value: 'Drama',
-                label: 'Drama',
-            }
-        ]
+        genreList: GENRE_LIST,
     };
+
+    onChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+            form: {
+                ...this.state.form,
+                [name]: value,
+            }
+        });
+    }
 
     resetForm = (e) => {
         e.preventDefault()
         this.setState({
             form: EMPTY_FORM,
-        });
-    }
-
-    onTitleChange = (e) => {
-        this.setState({
-            form: {
-                ...this.state.form,
-                movieTitle: e.target.value,
-            }
-        });
-    }
-    onReleaseDateChange = (e) => {
-        this.setState({
-            form: {
-                ...this.state.form,
-                releaseDate: e.target.value,
-            }
-        });
-    }
-    onMovieUrlChange = (e) => {
-        this.setState({
-            form: {
-                ...this.state.form,
-                movieUrl: e.target.value,
-            }
-        });
-    }
-    onRatingChange = (e) => {
-        this.setState({
-            form: {
-                ...this.state.form,
-                rating: e.target.value,
-            }
         });
     }
     onGenreChange = (e) => {
@@ -134,22 +51,6 @@ class MovieForm extends React.Component {
                 relevantGenres: e,
             },
         })
-    }
-    onDurationChange = (e) => {
-        this.setState({
-            form: {
-                ...this.state.form,
-                duration: e.target.value,
-            }
-        });
-    }
-    onDescriptionChange = (e) => {
-        this.setState({
-            form: {
-                ...this.state.form,
-                description: e.target.value,
-            }
-        });
     }
 
     render() {
@@ -172,7 +73,7 @@ class MovieForm extends React.Component {
                             id="movieTitle"
                             type="text"
                             placeholder="Movie title"
-                            onInput={this.onTitleChange}
+                            onInput={this.onChange}
                             value={this.state.form.movieTitle}
                         />
                     </div>
@@ -189,7 +90,7 @@ class MovieForm extends React.Component {
                             id="releaseDate"
                             type="date"
                             placeholder="Select date"
-                            onChange={this.onReleaseDateChange}
+                            onChange={this.onChange}
                             value={this.state.form.releaseDate}
                         />
                     </div>
@@ -208,7 +109,7 @@ class MovieForm extends React.Component {
                             id="movieUrl"
                             type="text"
                             placeholder="https://"
-                            onInput={this.onMovieUrlChange}
+                            onInput={this.onChange}
                             value={this.state.form.movieUrl}
                         />
                     </div>
@@ -228,7 +129,7 @@ class MovieForm extends React.Component {
                             min={0}
                             max={10}
                             step={0.1}
-                            onChange={this.onRatingChange}
+                            onChange={this.onChange}
                             value={this.state.form.rating}
                         />
                     </div>
@@ -237,13 +138,14 @@ class MovieForm extends React.Component {
                     <div className="MovieForm__field MovieForm__field--large">
                         <label
                             className="MovieForm__label"
-                            htmlFor="relevantGenre"
+                            htmlFor="relevantGenres"
                         >
                             genre
                         </label>
                         <Select
                             searchable={false}
                             multi={true}
+                            name="relevantGenres"
                             placeholder={"Select genre"}
                             className="MovieForm__select"
                             values={this.state.form.relevantGenres}
@@ -266,7 +168,7 @@ class MovieForm extends React.Component {
                             placeholder="minutes"
                             min={0}
                             step={1}
-                            onChange={this.onDurationChange}
+                            onChange={this.onChange}
                             value={this.state.form.duration}
                         />
                     </div>
@@ -275,16 +177,16 @@ class MovieForm extends React.Component {
                     <div className="MovieForm__field MovieForm__field--full">
                         <label
                             className="MovieForm__label"
-                            htmlFor="overview"
+                            htmlFor="description"
                         >
                             overview
                         </label>
                         <textarea
                             className="MovieForm__input MovieForm__input-textarea"
-                            name="overview"
-                            id="overview"
+                            name="description"
+                            id="description"
                             placeholder="Movie description"
-                            onInput={this.onDescriptionChange}
+                            onInput={this.onChange}
                             value={this.state.form.description}
                         />
                     </div>

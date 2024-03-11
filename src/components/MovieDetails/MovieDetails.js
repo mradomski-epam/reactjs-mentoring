@@ -28,7 +28,7 @@ class MovieDetails extends React.Component {
                             <span>{this.props.rating}</span>
                         </div>
                     </div>
-                    <span className="MovieDetails__genres">{this.props.relevantGenres.join(' & ')}</span>
+                    <span className="MovieDetails__genres">{this.props.relevantGenres.map(genre => genre.name).join(' & ')}</span>
                     <div className="MovieDetails__releaseYear">
                         <span>{this.props.releaseYear}</span>
                         <span>{this.getDurationTime(this.props.duration)}</span>

@@ -1,39 +1,10 @@
 import { useArgs } from '@storybook/preview-api';
 import Modal from './Modal';
 import MovieForm from '../MovieForm/MovieForm';
+import {GENRE_LIST} from "../../data/common";
 import './Modal.scss';
 import '../MovieForm/MovieForm.scss';
 import '../../App.scss';
-
-const GENRE_LIST = [
-    {   value: 'All',
-        label: 'All',
-    },
-    {
-        value: 'Documentary',
-        label: 'Documentary'
-    },
-    {
-        value: 'Comedy',
-        label: 'Comedy'
-    },
-    {
-        value: 'Thriller',
-        label: 'Thriller'
-    },
-    {
-        value: 'Crime',
-        label: 'Crime',
-    },
-    {
-        value: 'Action',
-        label: 'Action',
-    },
-    {
-        value: 'Drama',
-        label: 'Drama',
-    }
-]
 
 const FILLED_FORM = {
     movieTitle: 'TEST',

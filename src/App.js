@@ -50,8 +50,8 @@ class App extends React.Component {
               movieName: 'Scarface',
               releaseYear: 1983,
               relevantGenres: [
-                  'Action',
-                  'Drama',
+                  GENRE_LIST[5],
+                  GENRE_LIST[6],
               ],
               rating: 8.3,
               duration: 170,
@@ -62,8 +62,8 @@ class App extends React.Component {
               movieName: 'Casino',
               releaseYear: 1995,
               relevantGenres: [
-                  'Crime',
-                  'Thriller',
+                  GENRE_LIST[5],
+                  GENRE_LIST[4],
               ],
               rating: 8.2,
               duration: 178,
@@ -105,6 +105,7 @@ class App extends React.Component {
   render() {
     return (
         <div className="App">
+            <div onClick={this.toggleModalOpen}>asd</div>
           <div id="App-portal"></div>
             <Modal
                 onClose={this.toggleModalOpen}
