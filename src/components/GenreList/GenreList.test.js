@@ -1,9 +1,5 @@
-import {render, screen, cleanup, fireEvent} from "@testing-library/react";
+import {render, screen, fireEvent} from "@testing-library/react";
 import GenreList from "./GenreList";
-
-afterEach(() => {
-    cleanup();
-});
 
 const genreList = [
     {   id: 1,

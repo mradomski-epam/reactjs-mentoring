@@ -35,7 +35,6 @@ class Counter extends React.Component {
 
 Counter.propTypes = {
     initialValue: PropTypes.number,
-    onValueChange: PropTypes.func
 };
 
 Counter.defaultProps = {

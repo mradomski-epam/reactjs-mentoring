@@ -11,19 +11,10 @@
     color: gray;
     border-radius: 6px;
     font-size: 20px;
-    ::placeholder {
-      color: gray;
-    }
+    padding-left: 8px;
   }
 
   &__button {
-    width: 230px;
-    height: 60px;
     margin-left: 16px;
-    color: white;
-    font-size: 20px;
-    text-transform: uppercase;
-    background-color: #f65261;
-    border-radius: 6px;
   }
 }

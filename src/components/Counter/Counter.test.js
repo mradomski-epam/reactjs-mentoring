@@ -1,11 +1,7 @@
-import {render, screen, cleanup, fireEvent} from "@testing-library/react";
+import {render, screen, fireEvent} from "@testing-library/react";
 import Counter from "./Counter";
 
 const initialValue = 0;
-
-afterEach(() => {
-    cleanup();
-})
 
 test('should render Counter element with proper initial value', () => {
     render(<Counter initialValue={initialValue}/>);

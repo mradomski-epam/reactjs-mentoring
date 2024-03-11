@@ -1,0 +1,60 @@
+.Modal {
+  color: #ffffff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #232323;
+  padding: 36px;
+  font-size: 20px;
+  z-index: 1000;
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 1000;
+  }
+
+  &__header {
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 300;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  &__close {
+    color: #ffffff;
+    position: absolute;
+    right: 32px;
+    top: 24px;
+    width: 36px;
+    height: 36px;
+    opacity: .7;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+    &:before, &:after {
+      position: absolute;
+      left: 15px;
+      bottom: 0;
+      content: ' ';
+      height: 33px;
+      width: 2px;
+      background-color: #ffffff;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+}

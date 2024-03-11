@@ -28,7 +28,7 @@ class SearchForm extends React.Component {
                 <button
                     aria-label="search form submit"
                     type="submit"
-                    className="SearchForm__button"
+                    className="App-button App-button--primary SearchForm__button"
                     onClick={ this.handleSearch }
                 >
                     Search
