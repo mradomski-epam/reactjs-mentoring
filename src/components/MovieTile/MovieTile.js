@@ -11,25 +11,25 @@ class MovieTile extends React.Component {
         return (
             <div
                 className="MovieTile"
-                data-testid={`MovieTile-${this.props.movieName}`}
-                onClick={() => this.handleSelectMovie(this.props.movieName) }
+                data-testid={`MovieTile-${this.props.title}`}
+                onClick={() => this.handleSelectMovie(this.props.title) }
             >
                 <div className="MovieTile__image__wrapper">
                     {
-                        this.props.imageUrl ? <img src={this.props.imageUrl} alt={`${this.props.movieName} poster`} className="MovieTile__image"/> : ''
+                        this.props.poster_path ? <img src={this.props.poster_path} alt={`${this.props.title} poster`} className="MovieTile__image"/> : ''
                     }
                 </div>
                 <div className="MovieTile__description">
                     <div className="MovieTile__details">
-                        <h3 className="MovieTile__name">{ this.props.movieName }</h3>
+                        <h3 className="MovieTile__name">{ this.props.title }</h3>
                         <span className="MovieTile__genres">
                             {
-                                this.props.relevantGenres.map(genre => genre.name).join(', ')
+                                this.props.genres.join(', ')
                             }
                         </span>
                     </div>
                     <div className="MovieTile__releaseYear">
-                        { this.props.releaseYear }
+                        { this.props.release_date }
                     </div>
                 </div>
             </div>
@@ -38,18 +38,18 @@ class MovieTile extends React.Component {
 }
 
 MovieTile.propTypes = {
-    imageUrl:  PropTypes.string,
-    name: PropTypes.string,
-    releaseYear: PropTypes.number,
-    relevantGenres: PropTypes.arrayOf(PropTypes.object),
+    poster_path:  PropTypes.string,
+    title: PropTypes.string,
+    release_date: PropTypes.string,
+    genres: PropTypes.arrayOf(PropTypes.string),
     onSelectMovie: PropTypes.func,
 };
 
 MovieTile.defaultProps = {
-    imageUrl: '',
-    name: 'name',
-    releaseYear: 2024,
-    relevantGenres: [],
+    poster_path: '',
+    title: 'name',
+    release_date: '',
+    genres: [],
 };
 
 export default MovieTile;
