@@ -8,7 +8,7 @@ class SortControl extends React.Component {
     state = {
         sortByOptions: [
             {
-                label: 'Release Date', value: 'releaseDate',
+                label: 'Release Date', value: 'release_date',
             },
             {
                 label: 'Title', value: 'title',
@@ -30,7 +30,7 @@ class SortControl extends React.Component {
 }
 
 SortControl.propTypes = {
-    currentSort: PropTypes.object | null,
+    currentSort: PropTypes.arrayOf(PropTypes.object) | null,
     setCurrentSort: PropTypes.func,
 };
 

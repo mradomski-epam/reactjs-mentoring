@@ -1,0 +1,13 @@
+.MovieListPage {
+  &__movie-list {
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+  }
+  &__sort-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

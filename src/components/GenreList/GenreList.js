@@ -10,12 +10,12 @@ class GenreList extends React.Component {
         return (
             <ul role="genreList" className="GenreSelect__list" data-testid="genre-list">
                 {this.props.genreList.map((item) => {
-                    const isSelected = this.props.currentGenre === item.name;
+                    const isSelected = this.props.currentGenre === item.value;
                     return (
                         <li
                             role="presentation"
                             data-testid={`genre-list-${item.id}`}
-                            key={item.id}
+                            key={item.name}
                             className={
                                 "GenreSelect__list__item " +
                                 (isSelected ? "GenreSelect__list__item--selected" : "")
@@ -26,7 +26,7 @@ class GenreList extends React.Component {
                                 aria-controls={`panel-id-${item.id}`}
                                 aria-selected={isSelected}
                                 id={`tab-id-${item.id}`}
-                                onClick={() => this.handleSelect(item.name)}
+                                onClick={() => this.handleSelect(item.value)}
                             >
                                 {item.name}
                             </button>

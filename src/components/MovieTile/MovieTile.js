@@ -4,8 +4,8 @@ import './MovieTile.scss';
 
 class MovieTile extends React.Component {
 
-    handleSelectMovie = (name) => {
-        this.props.onSelectMovie(name);
+    handleSelectMovie = () => {
+        this.props.onSelectMovie(this.props);
     }
     render() {
         return (
