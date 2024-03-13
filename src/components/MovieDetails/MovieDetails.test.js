@@ -1,8 +1,6 @@
 import MovieDetails from "./MovieDetails";
 import {cleanup, render, screen} from "@testing-library/react";
 
-afterEach(cleanup);
-
 const movieDetailsTest = {
     poster_path: 'https://www.movieposters.com/cdn/shop/products/b892c2f862023362da3e66ec2b92a699_90de31ac-e4ca-476e-8cc0-f634509f364b_480x.progressive.jpg?v=1573585334',
     title: 'Scarface',
