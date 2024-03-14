@@ -8,7 +8,7 @@ class GenreList extends React.Component {
     }
     render() {
         return (
-            <ul role="genreList" className="GenreSelect__list" data-testid="genre-list">
+            <ul className="GenreSelect__list" data-testid="genre-list">
                 {this.props.genreList.map((item) => {
                     const isSelected = this.props.currentGenre === item.value;
                     return (
