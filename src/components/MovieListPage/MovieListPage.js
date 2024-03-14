@@ -6,44 +6,46 @@ import MovieDetails from "../MovieDetails/MovieDetails";
 import SearchForm from "../SearchForm/SearchForm";
 import GenreList from "../GenreList/GenreList";
 import SortControl from "../SortControl/SortControl";
-import axios from 'axios';
+import axiosInstance from '../../api/api';
+import {SORT_BY_OPTIONS} from "../../data/common";
 
 const MovieListPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [sortByOptions, setSortByOptions] = useState([
-        {
-            label: 'Release Date', value: 'releaseDate',
-        },
-        {
-            label: 'Title', value: 'title',
-        }
-    ]);
-    const [sortCriterion, setSortCriterion] = useState([sortByOptions[0]]);
+    const [sortCriterion, setSortCriterion] = useState([SORT_BY_OPTIONS[0]]);
     const [activeGenre, setActiveGenre] = useState('');
     const [movieList, setMovieList] = useState(MOVIES);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
-        async function getData() {
-            debugger;
-            const data = await axios.get(
-                'http://localhost:4000/movies',
-                {
-                    params: {
-                        search: searchQuery,
-                        sortBy: sortCriterion.length ? sortCriterion[0].value : null,
-                        sortOrder: 'asc',
-                        filter: activeGenre,
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+        (async () => {
+            try {
+                const data = await axiosInstance.get(
+                    '/movies',
+                    {
+                        params: {
+                            search: searchQuery,
+                            sortBy: sortCriterion.length ? sortCriterion[0].value : null,
+                            sortOrder: 'asc',
+                            filter: activeGenre,
+                        }
+                    }
+                );
+                if (!signal.aborted) {
+                    if (data.data.data) {
+                        setMovieList(data.data.data);
                     }
                 }
-            );
-            if (data.data.data) {
-                setMovieList(data.data.data);
-            } else {
-                console.error('Error with fetching movies');
+            } catch (e) {
+                if (!signal.aborted) {
+                    console.error(e);
+                }
             }
+        })();
+        return () => {
+            abortController.abort();
         }
-        getData();
     }, [searchQuery, sortCriterion, activeGenre]);
 
     return (
@@ -51,7 +53,7 @@ const MovieListPage = () => {
             <section className={"MovieListPage__search"}>
                 {
                     selectedMovie ?
-                        <MovieDetails {...selectedMovie}/> :
+                        <MovieDetails selectedMovie={selectedMovie}/> :
                         <div>
                             <SearchForm
                                 initialSearchQuery={searchQuery}
@@ -67,6 +69,7 @@ const MovieListPage = () => {
                     onSelect={setActiveGenre}
                 />
                 <SortControl
+                    sortByOptions={SORT_BY_OPTIONS}
                     currentSort={sortCriterion}
                     setCurrentSort={setSortCriterion}
                 />
@@ -74,7 +77,7 @@ const MovieListPage = () => {
             <section className={"MovieListPage__movie-list"}>
                 {
                     movieList.map((movie) => {
-                        return <MovieTile {...movie} onSelectMovie={setSelectedMovie} key={movie.title} />
+                        return <MovieTile movie={movie} onSelectMovie={setSelectedMovie} key={movie.title} />
                     })
                 }
             </section>
