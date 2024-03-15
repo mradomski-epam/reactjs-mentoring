@@ -41,15 +41,7 @@ class MovieDetails extends React.Component {
 }
 
 MovieDetails.propTypes = {
-    selectedMovie: PropTypes.objectOf({
-        poster_path:  PropTypes.string,
-        title: PropTypes.string,
-        release_date: PropTypes.string,
-        genres: PropTypes.arrayOf(PropTypes.string),
-        vote_average: PropTypes.number,
-        runtime: PropTypes.number,
-        overview: PropTypes.string,
-    }),
+    selectedMovie: PropTypes.object,
 };
 
 MovieDetails.defaultProps = {

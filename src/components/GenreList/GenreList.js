@@ -3,32 +3,33 @@ import PropTypes from 'prop-types';
 import './GenreList.scss';
 
 class GenreList extends React.Component {
-    handleSelect = (name) => {
-        this.props.onSelect(name);
+    handleSelect = (genre) => {
+        this.props.onSelect(genre === 'all' ? '' : genre);
     }
     render() {
         return (
             <ul className="GenreSelect__list" data-testid="genre-list">
                 {this.props.genreList.map((item) => {
-                    const isSelected = this.props.currentGenre === item.value;
+                    const isSelected = this.props.currentGenre === item;
                     return (
                         <li
                             role="presentation"
-                            data-testid={`genre-list-${item.id}`}
-                            key={item.name}
+                            data-testid={`genre-list-${item}`}
+                            key={item}
                             className={
                                 "GenreSelect__list__item " +
                                 (isSelected ? "GenreSelect__list__item--selected" : "")
                             }>
                             <button
+                                className="GenreSelect__list__item__button"
                                 role="tab"
-                                aria-label={item.name}
-                                aria-controls={`panel-id-${item.id}`}
+                                aria-label={item}
+                                aria-controls={`panel-id-${item}`}
                                 aria-selected={isSelected}
-                                id={`tab-id-${item.id}`}
-                                onClick={() => this.handleSelect(item.value)}
+                                id={`tab-id-${item}`}
+                                onClick={() => this.handleSelect(item)}
                             >
-                                {item.name}
+                                {item === '' ? 'all' : item}
                             </button>
                         </li>
                     );

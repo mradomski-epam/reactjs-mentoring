@@ -5,7 +5,7 @@ import './MovieTile.scss';
 class MovieTile extends React.Component {
 
     handleSelectMovie = () => {
-        this.props.onSelectMovie(this.props.movie);
+        this.props.onSelectMovie(this.props.movie.id);
     }
     render() {
         return (
@@ -38,12 +38,7 @@ class MovieTile extends React.Component {
 }
 
 MovieTile.propTypes = {
-    movie: PropTypes.objectOf({
-        poster_path:  PropTypes.string,
-        title: PropTypes.string,
-        release_date: PropTypes.string,
-        genres: PropTypes.arrayOf(PropTypes.string),
-    }),
+    movie: PropTypes.object,
     onSelectMovie: PropTypes.func,
 };
 
