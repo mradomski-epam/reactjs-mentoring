@@ -57,7 +57,9 @@ const MovieListPage = () => {
                 );
                 if (!signal.aborted) {
                     if (data.data.data) {
-                        navigate(`/?${createSearchParams(params)}`);
+                        window.location.href.includes('/movies') ?
+                            navigate(`/movies/${movieId}?${createSearchParams(params)}`) :
+                            navigate(`/?${createSearchParams(params)}`);
                         setMovieList(data.data.data);
                     }
                 }
