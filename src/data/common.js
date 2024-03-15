@@ -19,6 +19,7 @@ export const SORT_BY_OPTIONS = [
 
 export const MOVIES = [
     {
+        id: 1,
         poster_path: 'https://www.movieposters.com/cdn/shop/products/d3b27b0547871234b683c5e7b9549677_25c5cfd2-9653-4e3b-b8bc-fc2b9b7ed414_480x.progressive.jpg?v=1573585337',
         title: 'Scarface',
         release_date: '01-01-1983',
@@ -31,6 +32,7 @@ export const MOVIES = [
         overview: 'In 1980 Miami, a determined Cuban immigrant takes over a drug cartel and succumbs to greed.',
     },
     {
+        id: 2,
         poster_path: 'https://www.movieposters.com/cdn/shop/files/Casino.mpw.102809_480x.progressive.jpg?v=1707421876',
         title: 'Casino',
         release_date: '01-01-1995',

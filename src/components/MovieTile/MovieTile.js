@@ -12,6 +12,7 @@ class MovieTile extends React.Component {
             <div
                 className="MovieTile"
                 data-testid={`MovieTile-${this.props.movie.title}`}
+                data-cy={this.props.movie.id}
                 onClick={() => this.handleSelectMovie(this.props.title) }
             >
                 <div className="MovieTile__image__wrapper">

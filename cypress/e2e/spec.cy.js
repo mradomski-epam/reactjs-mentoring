@@ -1,4 +1,4 @@
-describe('entering main page and searching for movies', () => {
+describe('browsing movie list page', () => {
    it('should visit website, enter search query and have query in url params', () => {
        cy.visit('/');
        cy.get('input[placeholder=\"What do you want to search?\"]').type('testing');
@@ -22,3 +22,19 @@ describe('entering main page and searching for movies', () => {
         cy.url().should('include', 'title');
     })
 });
+
+
+describe('browsing movie details page', () => {
+    const movieId = '399035';
+
+    it('should visit movie details page', () => {
+        cy.visit(`/movies/${movieId}`);
+        cy.url().should('include', movieId);
+    });
+    it('should click on movie tile and go to details route', () => {
+        cy.visit(`/movies/${movieId}`);
+        cy.get('.MovieDetails__image').click();
+        cy.wait(1000);
+        cy.url().should('eq', 'http://localhost:3000/?sortOrder=asc');
+    });
+})
