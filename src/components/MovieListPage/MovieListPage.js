@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './MovieListPage.scss';
 import MovieTile from "../MovieTile/MovieTile";
-import MovieDetails from "../MovieDetails/MovieDetails";
 import SearchForm from "../SearchForm/SearchForm";
 import GenreList from "../GenreList/GenreList";
 import SortControl from "../SortControl/SortControl";
 import axiosInstance from '../../api/api';
-import { SORT_BY_OPTIONS, GENRE_LIST, MOVIES } from "../../data/common";
+import {SORT_BY_OPTIONS, GENRE_LIST, MOVIES, filterEmptyParams} from "../../data/common";
 import {
     useNavigate,
     useSearchParams,
-    createSearchParams,
+    createSearchParams, Outlet, useParams,
 } from "react-router-dom";
 
 const MovieListPage = () => {
@@ -19,35 +18,41 @@ const MovieListPage = () => {
     const [sortCriterion, setSortCriterion] = useState(searchParams.get('sortBy') || SORT_BY_OPTIONS[0]);
     const [activeGenre, setActiveGenre] = useState(searchParams.get('filter') || '');
     const [movieList, setMovieList] = useState(MOVIES);
-    const [selectedMovie] = useState(null);
     const navigate = useNavigate();
+    let { movieId } = useParams();
 
     const onSelectMovie = (movieId) => {
-        navigate(`/movies/${movieId}`);
+        const params = getParams();
+        // navigate(`/?${createSearchParams(params)}/movies/${movieId}`);
+
+        navigate(`/movies/${movieId}?${createSearchParams(params)}`);
+    }
+
+    const getParams = () => {
+        const search = searchQuery;
+        const sortBy = sortCriterion[0]?.value;
+        const sortOrder = 'asc';
+        const filter = activeGenre;
+
+        return filterEmptyParams({
+            search,
+            sortBy,
+            sortOrder,
+            filter,
+        });
     }
 
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
-        const search = searchQuery;
-        const sortBy = sortCriterion[0]?.value;
-        const sortOrder = 'asc';
-        const filter = activeGenre;
-        const params = {
-            search,
-            sortBy,
-            sortOrder,
-            filter,
-        };
-        Object.keys(params).forEach((key) => {
-            if (!params[key]) delete params[key];
-        });
+        const params = getParams();
+
         (async () => {
             try {
                 const data = await axiosInstance.get(
                     '/movies',
                     {
-                        params
+                        params,
                     }
                 );
                 if (!signal.aborted) {
@@ -70,16 +75,16 @@ const MovieListPage = () => {
     return (
         <div className="MovieListPage">
             <section className={"MovieListPage__search"}>
+                <Outlet/>
                 {
-                    selectedMovie ?
-                        <MovieDetails selectedMovie={selectedMovie}/> :
-                        <div>
-                            <SearchForm
-                                initialSearchQuery={searchQuery}
-                                onSearch={setSearchQuery}
-                            />
-                        </div>
+                       movieId ? null : <SearchForm
+                            initialSearchQuery={searchQuery}
+                            onSearch={setSearchQuery}
+                        />
+
                 }
+            </section>
+            <section>
             </section>
             <section className={"MovieListPage__sort-bar"}>
                 <GenreList

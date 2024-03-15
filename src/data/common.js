@@ -43,3 +43,13 @@ export const MOVIES = [
         overview: 'In Las Vegas, two best friends - a casino executive and a mafia enforcer - compete for a gambling empire and a fast-living, fast-loving socialite.',
     }
 ];
+
+export const filterEmptyParams = (params) => {
+    if (typeof(params) !== "object") {
+        return null;
+    }
+    Object.keys(params).forEach((key) => {
+        if (!params[key]) delete params[key];
+    });
+    return params;
+}

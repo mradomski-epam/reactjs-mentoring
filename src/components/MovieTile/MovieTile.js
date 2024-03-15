@@ -16,7 +16,16 @@ class MovieTile extends React.Component {
             >
                 <div className="MovieTile__image__wrapper">
                     {
-                        this.props.movie.poster_path ? <img src={this.props.movie.poster_path} alt={`${this.props.movie.title} poster`} className="MovieTile__image"/> : ''
+                        this.props.movie.poster_path ?
+                            <img
+                                src={this.props.movie.poster_path}
+                                alt={`${this.props.movie.title} poster`}
+                                className="MovieTile__image"
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror= null;
+                                    currentTarget.src = '/placeholder.png'
+                                }}
+                            /> : ''
                     }
                 </div>
                 <div className="MovieTile__description">
