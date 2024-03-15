@@ -14,12 +14,8 @@ const router = createBrowserRouter([
 
             }
         ],
-        // element: <SearchForm />
         element: <MovieListPage/>
     },
-    // {
-    //     path: '/movies/:movieId',
-    // }
 ]);
 
 class App extends React.Component {
