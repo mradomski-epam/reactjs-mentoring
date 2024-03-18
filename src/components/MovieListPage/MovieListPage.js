@@ -13,19 +13,18 @@ import {
 } from "react-router-dom";
 
 const MovieListPage = () => {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
-    const [sortCriterion, setSortCriterion] = useState(searchParams.get('sortBy') || SORT_BY_OPTIONS[0]);
+    const [sortCriterion, setSortCriterion] = useState(
+        SORT_BY_OPTIONS.find(item => item.value ===searchParams.get('sortBy')) || SORT_BY_OPTIONS[0]
+    );
     const [activeGenre, setActiveGenre] = useState(searchParams.get('filter') || '');
     const [movieList, setMovieList] = useState(MOVIES);
     const navigate = useNavigate();
     let { movieId } = useParams();
 
     const onSelectMovie = (movieId) => {
-        const params = getParams();
-        // navigate(`/?${createSearchParams(params)}/movies/${movieId}`);
-
-        navigate(`/movies/${movieId}?${createSearchParams(params)}`);
+        navigate(`/movies/${movieId}?${createSearchParams(searchParams)}`);
     }
 
     const getParams = () => {
@@ -33,12 +32,14 @@ const MovieListPage = () => {
         const sortBy = sortCriterion[0]?.value;
         const sortOrder = 'asc';
         const filter = activeGenre;
+        const searchBy = search ? 'title' : '';
 
         return filterEmptyParams({
             search,
             sortBy,
             sortOrder,
             filter,
+            searchBy,
         });
     }
 
@@ -52,14 +53,12 @@ const MovieListPage = () => {
                 const data = await axiosInstance.get(
                     '/movies',
                     {
-                        params,
+                        params: searchParams,
                     }
                 );
                 if (!signal.aborted) {
                     if (data.data.data) {
-                        window.location.href.includes('/movies') ?
-                            navigate(`/movies/${movieId}?${createSearchParams(params)}`) :
-                            navigate(`/?${createSearchParams(params)}`);
+                        setSearchParams(params);
                         setMovieList(data.data.data);
                     }
                 }
