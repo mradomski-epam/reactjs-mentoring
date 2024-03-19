@@ -5,6 +5,9 @@
     display: flex;
     justify-content: space-between;
   }
+  &__image {
+    cursor: pointer;
+  }
   &__details {
     display: flex;
     flex-direction: column;

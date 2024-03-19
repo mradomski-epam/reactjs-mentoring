@@ -5,18 +5,28 @@ import './MovieTile.scss';
 class MovieTile extends React.Component {
 
     handleSelectMovie = () => {
-        this.props.onSelectMovie(this.props.movie);
+        this.props.onSelectMovie(this.props.movie.id);
     }
     render() {
         return (
             <div
                 className="MovieTile"
                 data-testid={`MovieTile-${this.props.movie.title}`}
+                data-cy={this.props.movie.id}
                 onClick={() => this.handleSelectMovie(this.props.title) }
             >
                 <div className="MovieTile__image__wrapper">
                     {
-                        this.props.movie.poster_path ? <img src={this.props.movie.poster_path} alt={`${this.props.movie.title} poster`} className="MovieTile__image"/> : ''
+                        this.props.movie.poster_path ?
+                            <img
+                                src={this.props.movie.poster_path}
+                                alt={`${this.props.movie.title} poster`}
+                                className="MovieTile__image"
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror= null;
+                                    currentTarget.src = '/placeholder.png'
+                                }}
+                            /> : ''
                     }
                 </div>
                 <div className="MovieTile__description">
@@ -38,12 +48,7 @@ class MovieTile extends React.Component {
 }
 
 MovieTile.propTypes = {
-    movie: PropTypes.objectOf({
-        poster_path:  PropTypes.string,
-        title: PropTypes.string,
-        release_date: PropTypes.string,
-        genres: PropTypes.arrayOf(PropTypes.string),
-    }),
+    movie: PropTypes.object,
     onSelectMovie: PropTypes.func,
 };
 
