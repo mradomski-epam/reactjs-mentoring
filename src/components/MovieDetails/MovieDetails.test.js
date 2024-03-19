@@ -1,17 +1,17 @@
 import MovieDetails from "./MovieDetails";
-import {render, screen} from "@testing-library/react";
+import {cleanup, render, screen} from "@testing-library/react";
 
 const movieDetailsTest = {
-    imageUrl: 'https://www.movieposters.com/cdn/shop/products/b892c2f862023362da3e66ec2b92a699_90de31ac-e4ca-476e-8cc0-f634509f364b_480x.progressive.jpg?v=1573585334',
-    movieName: 'Scarface',
-    releaseYear: 1983,
-    relevantGenres: [
+    poster_path: 'https://www.movieposters.com/cdn/shop/products/b892c2f862023362da3e66ec2b92a699_90de31ac-e4ca-476e-8cc0-f634509f364b_480x.progressive.jpg?v=1573585334',
+    title: 'Scarface',
+    release_date: '1983',
+    genres: [
     'Action',
     'Drama',
 ],
-    rating: 8.3,
-    duration: 170,
-    description: 'In 1980 Miami, a determined Cuban immigrant takes over a drug cartel and succumbs to greed.',
+    vote_average: 8.3,
+    runtime: 170,
+    overview: 'In 1980 Miami, a determined Cuban immigrant takes over a drug cartel and succumbs to greed.',
 };
 
 const getDurationTime = (duration) => {
@@ -21,19 +21,19 @@ const getDurationTime = (duration) => {
 }
 test('component renders with proper all of the data visible', () => {
     render(<MovieDetails {...movieDetailsTest}/>);
-    const image = screen.getByAltText((movieDetailsTest.movieName + ' poster'));
-    const title = screen.getByText(movieDetailsTest.movieName);
-    const rating = screen.getByText(movieDetailsTest.rating.toString());
-    const releaseYear = screen.getByText(movieDetailsTest.releaseYear.toString());
-    const duration = screen.getByText(getDurationTime(movieDetailsTest.duration));
-    const description = screen.getByText(movieDetailsTest.description);
-    expect(image.getAttribute('src')).toBe(movieDetailsTest.imageUrl);
+    const image = screen.getByAltText((movieDetailsTest.title + ' poster'));
+    const title = screen.getByText(movieDetailsTest.title);
+    const vote_average = screen.getByText(movieDetailsTest.vote_average.toString());
+    const release_date = screen.getByText(movieDetailsTest.release_date.toString());
+    const runtime = screen.getByText(getDurationTime(movieDetailsTest.runtime));
+    const overview = screen.getByText(movieDetailsTest.overview);
+    expect(image.getAttribute('src')).toBe(movieDetailsTest.poster_path);
     expect([
         title,
-        rating,
-        releaseYear,
-        duration,
-        description
+        vote_average,
+        release_date,
+        runtime,
+        overview
     ]).toHaveLength(5);
 });
 

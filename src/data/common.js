@@ -26,4 +26,13 @@ export const GENRE_LIST = [
         value: 'Drama',
         label: 'Drama',
     }
-]
+];
+
+export const SORT_BY_OPTIONS = [
+    {
+        label: 'Release Date', value: 'release_date',
+    },
+    {
+        label: 'Title', value: 'title',
+    }
+];
