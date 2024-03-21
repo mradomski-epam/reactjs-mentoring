@@ -15,7 +15,7 @@ class Modal extends React.Component {
                     {this.props.children}
                 </div>
             </>
-        , document.getElementById('App'))
+        , document.getElementById('root'))
     }
 }
 
