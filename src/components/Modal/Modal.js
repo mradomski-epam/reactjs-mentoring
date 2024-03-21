@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 class Modal extends React.Component {
     render() {
-        if (!this.props.open) return null;
+        // if (!this.props.open) return null;
         return createPortal(
             <>
                 <div className="Modal__overlay"/>
@@ -15,12 +15,12 @@ class Modal extends React.Component {
                     {this.props.children}
                 </div>
             </>
-        , document.getElementById('App-portal'))
+        , document.getElementById('App'))
     }
 }
 
 Modal.propTypes = {
-    open: PropTypes.bool,
+    // open: PropTypes.bool,
     title: PropTypes.string | PropTypes.element,
     onClose: PropTypes.func,
     children: PropTypes.element,
