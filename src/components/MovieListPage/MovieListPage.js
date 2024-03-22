@@ -27,6 +27,10 @@ const MovieListPage = () => {
         navigate(`/movies/${movieId}?${createSearchParams(searchParams)}`);
     }
 
+    const onAddMovie = () => {
+        navigate(`/new?${createSearchParams(searchParams)}`);
+    }
+
     const getParams = () => {
         const search = searchQuery;
         const sortBy = sortCriterion[0]?.value;
@@ -75,6 +79,12 @@ const MovieListPage = () => {
 
     return (
         <div className="MovieListPage">
+            <section className={'MovieListPage__header'}>
+                <button
+                    className={'MovieListPage__add-movie'}
+                    onClick={onAddMovie}
+                >add movie</button>
+            </section>
             <section className={"MovieListPage__search"}>
                 <Outlet/>
                 {
